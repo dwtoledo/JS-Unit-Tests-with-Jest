@@ -4,7 +4,8 @@
   "description": "Reposity with my learning of Javascript Unit Tests using Jest",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watchAll"
   },
   "repository": {
     "type": "git",
