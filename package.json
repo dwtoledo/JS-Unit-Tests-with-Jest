@@ -1,4 +1,22 @@
 {
+  "name": "js-unit-tests-with-jest",
+  "version": "1.0.0",
+  "description": "Reposity with my learning of Javascript Unit Tests using Jest",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dwtoledo/js-unit-tests-with-jest.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dwtoledo/js-unit-tests-with-jest/issues"
+  },
+  "homepage": "https://github.com/dwtoledo/js-unit-tests-with-jest#readme",
   "devDependencies": {
     "@types/jest": "^28.1.6",
     "jest": "^28.1.3"
