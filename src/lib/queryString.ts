@@ -8,3 +8,20 @@ module.exports.objToQueryString = (obj) => {
         return `${encodeURIComponent(key)}=${encodeURIComponent(obj[key])}`;
     }).join('&');
 }
+
+module.exports.queryStringToObj = (queryString) => {
+    let object = {}
+
+    queryString.split('&').map(param => {
+        const keyValue = param.split('=');
+
+        if (decodeURIComponent(keyValue[1]).includes(',')) {
+            object[keyValue[0]] = decodeURIComponent(keyValue[1]).split(',');
+
+        } else {
+            object[keyValue[0]] = decodeURIComponent(keyValue[1]);
+        }
+    });
+
+    return object;
+}
