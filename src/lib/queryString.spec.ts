@@ -30,3 +30,7 @@ describe('Given an object input then the output should be the corresponding quer
         expect(objToQueryString(input)).toBe('name=Douglas&lastName=Toledo&socialNetworks=%40dwtoledo&inLoveWith=Front-end%20Development');
     });
 });
+
+describe('Given a queryString input then the output should be the corresponding object', () => {
+
+});
