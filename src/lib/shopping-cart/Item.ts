@@ -20,4 +20,11 @@ export default class Item {
   public getProduct(): Product {
     return this._product;
   }
+
+  public updateQuantity(quantity: number): void {
+    if (quantity <= 0) {
+      throw new Error("only positive quantities are allowed.");
+    }
+    this._quantity = quantity;
+  }
 }

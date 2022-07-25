@@ -21,4 +21,18 @@ describe("Item Class", () => {
       const item = new Item(0, product);
     }).toThrowError();
   });
+
+  it("should not update an item quantity with negative value", () => {
+    expect(() => {
+      const item = new Item(2, product);
+      item.updateQuantity(-2);
+    }).toThrowError();
+  });
+
+  it("should not update an item quantity with zero", () => {
+    expect(() => {
+      const item = new Item(3, product);
+      item.updateQuantity(0);
+    }).toThrowError();
+  });
 });

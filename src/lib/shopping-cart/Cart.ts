@@ -8,7 +8,15 @@ export default class Cart {
   }
 
   public add(item: Item): void {
-    this._items.push(item);
+    let itemIndex = this._items.findIndex(
+      (_item) => _item.getProduct() == item.getProduct()
+    );
+
+    if (itemIndex == -1) {
+      this._items.push(item);
+    } else {
+      this._items[itemIndex].updateQuantity(item.getQuantity());
+    }
   }
 
   public getTotal(): number {

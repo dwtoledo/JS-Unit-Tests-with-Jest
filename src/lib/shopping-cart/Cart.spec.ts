@@ -29,4 +29,18 @@ describe("Cart Class", () => {
 
     expect(cart.getTotal()).toBe(55);
   });
+
+  it("should ensure to update the product quantity if the same product was already added before", () => {
+    const mocked_product_1 = new Product();
+    mocked_product_1.setName("Mocked Product 1");
+    mocked_product_1.setPrice(10);
+
+    const mocked_item_1 = new Item(8, mocked_product_1);
+    cart.add(mocked_item_1);
+
+    const mocked_item_2 = new Item(5, mocked_product_1);
+    cart.add(mocked_item_2);
+
+    expect(cart.getTotal()).toBe(50);
+  });
 });
