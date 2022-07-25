@@ -1,4 +1,4 @@
-module.exports.objToQueryString = (obj) => {
+export function objToQueryString(obj) {
     return Object.keys(obj).map((key) => {
 
         if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
@@ -9,7 +9,7 @@ module.exports.objToQueryString = (obj) => {
     }).join('&');
 }
 
-module.exports.queryStringToObj = (queryString) => {
+export function queryStringToObj(queryString) {
     let object = {}
 
     queryString.split('&').map(param => {

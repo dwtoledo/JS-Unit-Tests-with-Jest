@@ -1,5 +1,4 @@
-const { objToQueryString } = require('./queryString');
-const { queryStringToObj } = require('./queryString');
+import { objToQueryString, queryStringToObj } from './queryString';
 
 describe('Given an object input then the output should be the corresponding queryString', () => {
 

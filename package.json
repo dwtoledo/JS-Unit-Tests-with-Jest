@@ -20,7 +20,10 @@
   },
   "homepage": "https://github.com/dwtoledo/js-unit-tests-with-jest#readme",
   "devDependencies": {
+    "@babel/core": "^7.18.9",
+    "@babel/preset-env": "^7.18.9",
     "@types/jest": "^28.1.6",
+    "babel-jest": "^28.1.3",
     "jest": "^28.1.3"
   }
 }
