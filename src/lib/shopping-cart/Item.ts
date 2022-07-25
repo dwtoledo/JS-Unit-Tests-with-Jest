@@ -1,14 +1,23 @@
-export default class Item {
-  private quantity: number;
+import Product from "./Product";
 
-  constructor(quantity: number) {
+export default class Item {
+  private _quantity: number;
+  private _product: Product;
+
+  constructor(quantity: number, product: Product) {
     if (quantity <= 0) {
       throw new Error("only positive quantities are allowed.");
     }
-    this.quantity = quantity;
+
+    this._product = product;
+    this._quantity = quantity;
   }
 
   public getQuantity(): number {
-    return this.quantity;
+    return this._quantity;
+  }
+
+  public getProduct(): Product {
+    return this._product;
   }
 }
