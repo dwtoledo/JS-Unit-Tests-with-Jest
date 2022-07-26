@@ -1,4 +1,5 @@
 import Item from "./Item";
+import Product from "./Product";
 
 export default class Cart {
   private _items: Array<Item>;
@@ -30,5 +31,16 @@ export default class Cart {
     });
 
     return total;
+  }
+
+  public remove(product: Product): void {
+    if (this._items.length) {
+      let itemIndex = this._items.findIndex(
+        (_item) => _item.getProduct() == product
+      );
+      if (itemIndex != -1) {
+        this._items = this._items.splice(itemIndex, 1);
+      }
+    }
   }
 }
