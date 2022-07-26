@@ -95,4 +95,33 @@ describe("Cart Class", () => {
       expect(cart.getTotal()).toEqual(0);
     });
   });
+
+  describe("Summary process", () => {
+    it("should throw an error when summary function is called without added items", () => {
+      expect(() => {
+        cart.summary();
+      }).toThrowError();
+    });
+
+    it("should return the checkout summary without reset the cart", () => {
+      const mocked_item_1 = new Item(1, mocked_product_1);
+      const mocked_item_2 = new Item(3, mocked_product_2);
+      const mocked_summary = new Checkout([mocked_item_1, mocked_item_2], 55);
+
+      cart.add(mocked_item_1);
+      cart.add(mocked_item_2);
+
+      expect(cart.summary()).toEqual(mocked_summary);
+    });
+
+    it("should not reset the cart after the summary is processed", () => {
+      const mocked_item_1 = new Item(1, mocked_product_1);
+      const mocked_item_2 = new Item(3, mocked_product_2);
+      cart.add(mocked_item_1);
+      cart.add(mocked_item_2);
+      cart.summary();
+
+      expect(cart.getTotal()).toEqual(55);
+    });
+  });
 });
