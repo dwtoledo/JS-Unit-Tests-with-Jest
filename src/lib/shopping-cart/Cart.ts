@@ -1,3 +1,4 @@
+import Checkout from "./Checkout";
 import Item from "./Item";
 import Product from "./Product";
 
@@ -42,5 +43,13 @@ export default class Cart {
         this._items = this._items.splice(itemIndex, 1);
       }
     }
+  }
+
+  public getItems(): Array<Item> {
+    return this._items;
+  }
+
+  public checkout(): Checkout {
+    return new Checkout(this._items, this.getTotal());
   }
 }
