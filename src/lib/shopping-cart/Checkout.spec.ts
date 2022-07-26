@@ -28,4 +28,18 @@ describe("Checkout Class", () => {
       const checkout = new Checkout(items, 0);
     }).not.toThrowError();
   });
+
+  it('should getTotal function return the total', () => {
+    items.push(new Item(2, new Product()));
+    const checkout = new Checkout(items, 2);
+
+    expect(checkout.getTotal()).toBe(2);
+  });
+
+  it('should getItems function return the items', () => {
+    items.push(new Item(2, new Product()));
+    const checkout = new Checkout(items, 2);
+
+    expect(checkout.getItems()).toEqual(items);
+  });
 });
