@@ -50,6 +50,16 @@ export default class Cart {
   }
 
   public checkout(): Checkout {
-    return new Checkout(this._items, this.getTotal());
+    if (!this._items.length) {
+      throw new Error("there are no items for checkout");
+    }
+    const checkout = new Checkout(this._items, this.getTotal());
+    this.reset();
+    
+    return checkout;
+  }
+
+  private reset(): void {
+    this._items = new Array<Item>;
   }
 }
