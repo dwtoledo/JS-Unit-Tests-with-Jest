@@ -27,25 +27,26 @@ export default class Cart {
     }
 
     let total = 0;
-    let discount = 0;
-
     this._items.forEach((item) => {
-      if (item.getDiscountCondition()) {
-        if (item.getQuantity() >= item.getDiscountCondition().getMinimumQuantity()) {
-          discount = item.getDiscountCondition().getPercentage();
-        }
-      } else {
-        discount = 0;
-      }
-
-      const itemTotal = item.getQuantity() * item.getProduct().getPrice();
-      const itemDiscount = itemTotal * (discount / 100);
-      const itemTotalAfterDiscount = itemTotal - itemDiscount;
-
-      total = total + itemTotalAfterDiscount;
+      total = total + this.calculateItemTotalAfterDiscount(item);
     });
 
     return total;
+  }
+
+  private calculateItemTotalAfterDiscount(item: Item): number {
+    let discountPercentage = 0;
+
+    if (item.getDiscountCondition()) {
+      if (item.getQuantity() >= item.getDiscountCondition().getMinimumQuantity()) {
+        discountPercentage = item.getDiscountCondition().getPercentage();
+      }
+    }
+
+    const total = item.getQuantity() * item.getProduct().getPrice();
+    const discount = total * (discountPercentage / 100);
+
+    return (total - discount);
   }
 
   public remove(product: Product): void {
