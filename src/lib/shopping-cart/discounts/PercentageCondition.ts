@@ -1,4 +1,7 @@
-export class PercentageDiscountCondition {
+import Item from "../Item";
+import { IDiscount } from "./IDiscount";
+
+export class PercentageCondition implements IDiscount {
   private _percentage: number;
   private _minimumQuantity: number;
 
@@ -21,5 +24,18 @@ export class PercentageDiscountCondition {
 
   public getMinimumQuantity(): number {
     return this._minimumQuantity;
+  }
+
+  public getTotalAfterDiscount(item: Item): number {
+    let discountPercentage = 0;
+
+    if (item.getQuantity() >= this._minimumQuantity) {
+      discountPercentage = this._percentage;
+    }
+
+    const total = item.getQuantity() * item.getProduct().getPrice();
+    const discount = total * (discountPercentage / 100);
+
+    return (total - discount);
   }
 }
