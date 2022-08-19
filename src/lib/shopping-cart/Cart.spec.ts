@@ -1,5 +1,6 @@
 import Cart from "./Cart";
 import Checkout from "./Checkout";
+import { DiscountCondition } from "./DiscountCondition";
 import Item from "./Item";
 import Product from "./Product";
 
@@ -122,6 +123,39 @@ describe("Cart Class", () => {
       cart.summary();
 
       expect(cart.getTotal()).toEqual(55);
+    });
+  });
+
+  describe('Add Discount Conditions - Update total value', () => {
+    it('should update total value with single cart item with discount condition', () => {
+      const mocked_item_1 = new Item(2, mocked_product_1);
+      mocked_item_1.setDiscountCondition(new DiscountCondition(15, 2));
+      cart.add(mocked_item_1);
+
+      expect(cart.getTotal()).toBe(17);
+    });
+
+    it('should update total value with two cart items, one with discount condition and other not', () => {
+      const mocked_item_1 = new Item(2, mocked_product_1);
+      mocked_item_1.setDiscountCondition(new DiscountCondition(15, 2));
+      cart.add(mocked_item_1);
+
+      const mocked_item_2 = new Item(5, mocked_product_2);
+      cart.add(mocked_item_2);
+
+      expect(cart.getTotal()).toBe(92);
+    });
+
+    it('should update total value with multiple cart items with discount condition', () => {
+      const mocked_item_1 = new Item(2, mocked_product_1);
+      mocked_item_1.setDiscountCondition(new DiscountCondition(15, 2));
+      cart.add(mocked_item_1);
+
+      const mocked_item_2 = new Item(5, mocked_product_2);
+      mocked_item_2.setDiscountCondition(new DiscountCondition(50, 4));
+      cart.add(mocked_item_2);
+
+      expect(cart.getTotal()).toBe(54.5);
     });
   });
 });

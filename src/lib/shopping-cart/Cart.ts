@@ -27,8 +27,22 @@ export default class Cart {
     }
 
     let total = 0;
+    let discount = 0;
+
     this._items.forEach((item) => {
-      total = total + item.getQuantity() * item.getProduct().getPrice();
+      if (item.getDiscountCondition()) {
+        if (item.getQuantity() >= item.getDiscountCondition().getMinimumQuantity()) {
+          discount = item.getDiscountCondition().getPercentage();
+        }
+      } else {
+        discount = 0;
+      }
+
+      const itemTotal = item.getQuantity() * item.getProduct().getPrice();
+      const itemDiscount = itemTotal * (discount / 100);
+      const itemTotalAfterDiscount = itemTotal - itemDiscount;
+
+      total = total + itemTotalAfterDiscount;
     });
 
     return total;
@@ -52,7 +66,7 @@ export default class Cart {
   public checkout(): Checkout {
     const checkout = this.prepareCheckout();
     this.reset();
-    
+
     return checkout;
   }
 
