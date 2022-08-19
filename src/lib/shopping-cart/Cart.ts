@@ -37,9 +37,9 @@ export default class Cart {
   private calculateItemTotalAfterDiscount(item: Item): number {
     let discountPercentage = 0;
 
-    if (item.getDiscountCondition()) {
-      if (item.getQuantity() >= item.getDiscountCondition().getMinimumQuantity()) {
-        discountPercentage = item.getDiscountCondition().getPercentage();
+    if (item.getPercentageDiscountCondition()) {
+      if (item.getQuantity() >= item.getPercentageDiscountCondition().getMinimumQuantity()) {
+        discountPercentage = item.getPercentageDiscountCondition().getPercentage();
       }
     }
 

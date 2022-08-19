@@ -1,4 +1,4 @@
-export class DiscountCondition {
+export class PercentageDiscountCondition {
   private _percentage: number;
   private _minimumQuantity: number;
 
