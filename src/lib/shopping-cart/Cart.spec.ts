@@ -1,6 +1,7 @@
 import Cart from "./Cart";
 import Checkout from "./Checkout";
 import { PercentageCondition } from "./discounts/PercentageCondition";
+import { QuantityCondition } from "./discounts/QuantityCondition";
 import Item from "./Item";
 import Product from "./Product";
 
@@ -8,6 +9,7 @@ describe("Cart Class", () => {
   let cart: Cart;
   let mocked_product_1: Product;
   let mocked_product_2: Product;
+  let mocked_product_3: Product;
 
   beforeEach(() => {
     cart = new Cart();
@@ -19,6 +21,10 @@ describe("Cart Class", () => {
     mocked_product_2 = new Product();
     mocked_product_2.setName("Mocked Product 2");
     mocked_product_2.setPrice(15);
+
+    mocked_product_3 = new Product();
+    mocked_product_3.setName("Mocked Product 3");
+    mocked_product_3.setPrice(8);
   });
 
   describe("Add and remove cart items - Update total value", () => {
@@ -127,17 +133,17 @@ describe("Cart Class", () => {
   });
 
   describe('Add Discount Conditions - Update total value', () => {
-    it('should update total value with single cart item with discount condition', () => {
+    it('should update total value with single cart item with percentage discount condition', () => {
       const mocked_item_1 = new Item(2, mocked_product_1);
-      mocked_item_1.setPercentageCondition(new PercentageCondition(15, 2));
+      mocked_item_1.setDiscountCondition(new PercentageCondition(15, 2));
       cart.add(mocked_item_1);
 
       expect(cart.getTotal()).toBe(17);
     });
 
-    it('should update total value with two cart items, one with discount condition and other not', () => {
+    it('should update total value with two cart items, one with percentage discount condition and other not', () => {
       const mocked_item_1 = new Item(2, mocked_product_1);
-      mocked_item_1.setPercentageCondition(new PercentageCondition(15, 2));
+      mocked_item_1.setDiscountCondition(new PercentageCondition(15, 2));
       cart.add(mocked_item_1);
 
       const mocked_item_2 = new Item(5, mocked_product_2);
@@ -146,16 +152,62 @@ describe("Cart Class", () => {
       expect(cart.getTotal()).toBe(92);
     });
 
-    it('should update total value with multiple cart items with discount condition', () => {
+    it('should update total value with multiple cart items with percentage discount condition', () => {
       const mocked_item_1 = new Item(2, mocked_product_1);
-      mocked_item_1.setPercentageCondition(new PercentageCondition(15, 2));
+      mocked_item_1.setDiscountCondition(new PercentageCondition(15, 2));
       cart.add(mocked_item_1);
 
       const mocked_item_2 = new Item(5, mocked_product_2);
-      mocked_item_2.setPercentageCondition(new PercentageCondition(50, 4));
+      mocked_item_2.setDiscountCondition(new PercentageCondition(50, 4));
       cart.add(mocked_item_2);
 
       expect(cart.getTotal()).toBe(54.5);
     });
+  });
+
+  it('should update total value with single cart item with quantity discount condition', () => {
+    const mocked_item_1 = new Item(3, mocked_product_2);
+    mocked_item_1.setDiscountCondition(new QuantityCondition(3, 2));
+    cart.add(mocked_item_1);
+
+    expect(cart.getTotal()).toBe(30);
+  });
+
+  it('should update total value with two cart items, one with quantity discount condition and other not', () => {
+    const mocked_item_1 = new Item(3, mocked_product_1);
+    mocked_item_1.setDiscountCondition(new QuantityCondition(3, 1));
+    cart.add(mocked_item_1);
+
+    const mocked_item_2 = new Item(5, mocked_product_2);
+    cart.add(mocked_item_2);
+
+    expect(cart.getTotal()).toBe(85);
+  });
+
+  it('should update total value with two cart items, one with quantity discount condition and other with percentage', () => {
+    const mocked_item_1 = new Item(4, mocked_product_1);
+    mocked_item_1.setDiscountCondition(new QuantityCondition(3, 2));
+    cart.add(mocked_item_1);
+
+    const mocked_item_2 = new Item(5, mocked_product_2);
+    mocked_item_2.setDiscountCondition(new PercentageCondition(75, 3))
+    cart.add(mocked_item_2);
+
+    expect(cart.getTotal()).toBe(48.75);
+  });
+
+  it('should update total value with three cart items, one with quantity discount condition, other with percentage discount condition and the last one without any discount', () => {
+    const mocked_item_1 = new Item(4, mocked_product_1);
+    mocked_item_1.setDiscountCondition(new QuantityCondition(3, 2));
+    cart.add(mocked_item_1);
+
+    const mocked_item_2 = new Item(5, mocked_product_2);
+    mocked_item_2.setDiscountCondition(new PercentageCondition(75, 3))
+    cart.add(mocked_item_2);
+
+    const mocked_item_3 = new Item(2, mocked_product_3);
+    cart.add(mocked_item_3);
+
+    expect(cart.getTotal()).toBe(64.75);
   });
 });

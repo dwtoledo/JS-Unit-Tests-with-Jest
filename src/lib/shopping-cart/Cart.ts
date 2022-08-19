@@ -35,18 +35,10 @@ export default class Cart {
   }
 
   private calculateItemTotalAfterDiscount(item: Item): number {
-    let discountPercentage = 0;
-
-    if (item.getPercentageCondition()) {
-      if (item.getQuantity() >= item.getPercentageCondition().getMinimumQuantity()) {
-        discountPercentage = item.getPercentageCondition().getPercentage();
-      }
+    if (item.getDiscountCondition()) {
+      return item.getDiscountCondition().getTotalAfterDiscount(item);
     }
-
-    const total = item.getQuantity() * item.getProduct().getPrice();
-    const discount = total * (discountPercentage / 100);
-
-    return (total - discount);
+    return item.getQuantity() * item.getProduct().getPrice();
   }
 
   public remove(product: Product): void {

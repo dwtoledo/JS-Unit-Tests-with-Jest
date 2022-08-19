@@ -1,10 +1,10 @@
-import { PercentageCondition } from "./discounts/PercentageCondition";
+import { IDiscount } from "./discounts/IDiscount";
 import Product from "./Product";
 
 export default class Item {
   private _quantity: number;
   private _product: Product;
-  private _percentageCondition: PercentageCondition;
+  private _discountCondition: IDiscount;
 
   constructor(quantity: number, product: Product) {
     if (quantity <= 0) {
@@ -30,11 +30,11 @@ export default class Item {
     this._quantity = quantity;
   }
 
-  public getPercentageCondition(): PercentageCondition {
-    return this._percentageCondition;
+  public getDiscountCondition(): IDiscount {
+    return this._discountCondition;
   }
 
-  public setPercentageCondition(percentageCondition: PercentageCondition): void {
-    this._percentageCondition = percentageCondition;
+  public setDiscountCondition(discountCondition: IDiscount): void {
+    this._discountCondition = discountCondition;
   }
 }
