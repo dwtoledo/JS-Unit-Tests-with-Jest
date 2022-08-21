@@ -18,14 +18,6 @@ export class PercentageCondition implements IDiscount {
     this._minimumQuantity = minimumQuantity;
   }
 
-  public getPercentage(): number {
-    return this._percentage;
-  }
-
-  public getMinimumQuantity(): number {
-    return this._minimumQuantity;
-  }
-
   public getTotalAfterDiscount(item: Item): number {
     let discountPercentage = 0;
 
