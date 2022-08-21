@@ -22,14 +22,6 @@ export class QuantityCondition implements IDiscount {
     this._payQuantity = payQuantity;
   }
 
-  public getTakeQuantity(): number {
-    return this._takeQuantity;
-  }
-
-  public getPayQuantity(): number {
-    return this._payQuantity;
-  }
-
   private calculateDiscountRate(): number {
     return this._payQuantity / this._takeQuantity;
   }
