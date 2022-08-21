@@ -15,10 +15,6 @@ export default class Product {
     this._price = price;
   }
 
-  public getName(): string {
-    return this._name;
-  }
-
   public setName(name: string): void {
     if (name.length < this.NAME_MIN_LENGTH) {
       throw new Error(`min of ${this.NAME_MIN_LENGTH} chars is required.`);
