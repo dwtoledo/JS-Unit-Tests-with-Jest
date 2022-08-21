@@ -1,3 +1,5 @@
+import { PercentageCondition } from "./discounts/PercentageCondition";
+import { QuantityCondition } from "./discounts/QuantityCondition";
 import Item from "./Item";
 import Product from "./Product";
 
@@ -34,5 +36,20 @@ describe("Item Class", () => {
       const item = new Item(3, product);
       item.updateQuantity(0);
     }).toThrowError();
+  });
+
+  it("should add one discount condition", () => {
+    const item = new Item(3, product);
+    item.setDiscountCondition(new QuantityCondition(4, 2));
+
+    expect(item.getDiscountConditions().length).toBe(1);
+  });
+
+  it("should add more than one discount conditions", () => {
+    const item = new Item(3, product);
+    item.setDiscountCondition(new QuantityCondition(4, 2));
+    item.setDiscountCondition(new PercentageCondition(75, 3));
+
+    expect(item.getDiscountConditions().length).toBe(2);
   });
 });

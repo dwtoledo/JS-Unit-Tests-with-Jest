@@ -35,10 +35,19 @@ export default class Cart {
   }
 
   private calculateItemTotalAfterDiscount(item: Item): number {
-    if (item.getDiscountCondition()) {
-      return item.getDiscountCondition().getTotalAfterDiscount(item);
+    if (item.getDiscountConditions().length) {
+      let itemTotals = new Array<number>();
+
+      item.getDiscountConditions().forEach((discountCondition) => {
+        itemTotals.push(discountCondition.getTotalAfterDiscount(item));
+      });
+
+      itemTotals = itemTotals.sort((a, b) => a - b);
+      return itemTotals[0];
+
+    } else {
+      return item.getQuantity() * item.getProduct().getPrice();
     }
-    return item.getQuantity() * item.getProduct().getPrice();
   }
 
   public remove(product: Product): void {

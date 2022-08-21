@@ -4,7 +4,7 @@ import Product from "./Product";
 export default class Item {
   private _quantity: number;
   private _product: Product;
-  private _discountCondition: IDiscount;
+  private _discountConditions: Array<IDiscount>;
 
   constructor(quantity: number, product: Product) {
     if (quantity <= 0) {
@@ -13,6 +13,7 @@ export default class Item {
 
     this._product = product;
     this._quantity = quantity;
+    this._discountConditions = new Array<IDiscount>();
   }
 
   public getQuantity(): number {
@@ -30,11 +31,11 @@ export default class Item {
     this._quantity = quantity;
   }
 
-  public getDiscountCondition(): IDiscount {
-    return this._discountCondition;
+  public getDiscountConditions(): Array<IDiscount> {
+    return this._discountConditions;
   }
 
   public setDiscountCondition(discountCondition: IDiscount): void {
-    this._discountCondition = discountCondition;
+    this._discountConditions.push(discountCondition);
   }
 }
