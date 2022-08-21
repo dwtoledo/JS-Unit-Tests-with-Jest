@@ -61,10 +61,6 @@ export default class Cart {
     }
   }
 
-  public getItems(): Array<Item> {
-    return this._items;
-  }
-
   public checkout(): Checkout {
     const checkout = this.prepareCheckout();
     this.reset();
