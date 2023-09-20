@@ -1,4 +1,10 @@
-This repository contains my studies of "Testing Javascript Applications Using Jest".
-The first module that I completed was focus to Jest presentation and its basic implementation on a Typescript project without a frontend framework. I used ES6 JS modules on this repository.
+# Starting with Jest testing
+This repository documents my initial exploration of Jest for testing JavaScript applications.
 
-**Now I'm studying React because I'll start testing React Applications soon.**
+## Highlights
+- Learn Jest for JavaScript app testing.
+- See Jest in action with code examples.
+
+## Contents
+- Study notes and documentation.
+- Code samples for practical understanding.
